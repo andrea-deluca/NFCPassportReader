@@ -1,0 +1,107 @@
+author: Andrea Deluca
+author_url: https://github.com/andrea-deluca
+github_url: https://github.com/andrea-deluca/NFCPassportReader
+output: docs
+swift_build_tool: xcodebuild
+build_tool_arguments:
+  - -scheme
+  - NFCPassportReader
+  - -sdk
+  - iphoneos17.0
+  - -destination
+  - platform=iOS,name=Any iOS Device
+min_acl: internal
+exclude: 
+  - Sources/NFCPassportReader/ASN1/*
+theme: fullwidth
+readme: docs/md/README.md
+documentation: docs/md/documentation/*.md
+custom_categories:
+  - name: Documentation
+    children:
+      - Installation
+      - Getting Started
+      - Demo
+      - Get In Touch
+      - Credits
+      - Changelog
+      - License
+  - name: Overview
+    children:
+      - NFCPassportReader
+      - NFCPassportModel
+      - APDUResponse
+      - TagReader
+  - name: Data Models
+    children:
+      - DocumentDetails
+      - FaceBiometricDataEncoding
+      - MRZ
+      - PersonalDetails
+      - TDType
+      - TravelDocument
+  - name: Cryptography
+    children:
+      - EncryptionAlgorithm
+      - EncryptionAlgorithmParams
+      - HashAlgorithm
+      - KeyAgreementAlgorithm
+      - StandardizedDomainParameters
+      - StandardizedDomainParametersType
+  - name: Security Core
+    children:
+      - ObjectIdentifier
+      - SubjectPublicKeyInfo
+      - SecurityInfo
+      - SecurityInfoDecoder
+      - SecurityObjectIdentifiers
+      - SecurityProtocol
+  - name: IC Access
+    children:
+      - BACHandler
+      - DocumentBasicAccessKeys
+      - PACEHandler
+      - PACEInfo
+      - PACEMapping
+      - PACEParametersDecoder
+      - PACESecurityProtocol
+  - name: IC Authentication
+    children:
+      - CAPublicKeySecurityProtocol
+      - ChipAuthenticationHandler
+      - ChipAuthenticationInfo
+      - ChipAuthenticationPublicKeyInfo
+      - ChipAuthenticationSecurityProtocol
+  - name: IC Data Authentication
+    children:
+      - PassiveAuthenticationHandler
+      - PKCS7
+      - SignedData
+      - X509Certificate
+      - X509CertificateDetails
+  - name: Secure Session
+    children:
+      - NFCSecureSession
+      - SecureChannel
+      - SecureMessaging
+      - SecurityConfiguration
+      - SessionKeyGenerator
+  - name: DataGroups
+    children:
+      - CardAccess
+      - DataGroup
+      - COM
+      - DataGroup1
+      - DataGroup2
+      - DataGroup7
+      - DataGroup11
+      - DataGroup12
+      - DataGroup14
+      - SOD
+      - DGNotImplemented
+      - DGDecoder
+      - DGTag
+  - name: Errors
+    children:
+      - APDUResponseError
+      - NFCPassportReaderError
