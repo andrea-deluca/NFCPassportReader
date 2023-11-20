@@ -103,10 +103,10 @@ from [swift-asn1](https://github.com/apple/swift-asn1) developed by [@apple](htt
 
 The following are some notes of what should definitely be done:
 
-- Implement automated tests also providing a functioning guarantee for all cryptographic possibilities that may be used by eMRTD
-- Implement integrated mapping and chip authentication mapping for PACE access mechanism
-- Implement full Passive Autentication
-- Implement Active Authentication, also providing decoding of secured elements such as DG3, and Terminal Authentication, if needed 
-- Implement data decoding for missing data groups
-- Implement `GET RESPONSE` APDU to try to handle extra bytes reading
-- Fully integrate [swift-asn1](https://github.com/apple/swift-asn1) package developed by [@apple](https://github.com/apple)
+- [ ] Implement automated tests also providing a functioning guarantee for all cryptographic possibilities that may be used by eMRTD
+- [ ] Implement integrated mapping and chip authentication mapping for PACE access mechanism
+- [ ] Implement full Passive Autentication
+- [ ] Implement Active Authentication, also providing decoding of secured elements such as DG3, and Terminal Authentication, if needed 
+- [ ] Implement data decoding for missing data groups
+- [ ] Implement `GET RESPONSE` APDU to try to handle extra bytes reading
+- [ ] Fully integrate [swift-asn1](https://github.com/apple/swift-asn1) package developed by [@apple](https://github.com/apple)
