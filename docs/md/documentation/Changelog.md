@@ -1,6 +1,6 @@
 # 0.1.0
 
-*Released: 2023/11/2*
+*Released: 2023/11/20*
 
 **What's changed:**
 
