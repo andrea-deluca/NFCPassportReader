@@ -25,7 +25,7 @@ during Passive Authentication is not supported.
  - Active Authentication and Terminal Authentication are not supported.
 
 See more about eMRTD data reading through NFC from the [ICAO Doc 9303](https://www.icao.int/publications/pages/publication.aspx?docnum=9303).
-See more about the package implementation from the source code and see also the [documentation]().
+See more about the package implementation from the source code and see also the [documentation](https://andrea-deluca.github.io/NFCPassportReader/).
 
 ## Table of Contents
 
