@@ -16,11 +16,44 @@ public struct PersonalDetails {
 
     private var details: [ASN1Tag: String] = [:]
     
-    public var fullName: String? { details[0x5F0E] }
+    public var fullName: String? {
+        if let components = details[0x5F0E]?.components(separatedBy: "<<") {
+            let surname = components[0].components(separatedBy: "<").joined(separator: " ")
+            let name = components[1].components(separatedBy: "<").joined(separator: " ")
+            return [surname, name].joined(separator: " ")
+        } else { return details[0x5F0E] }
+    }
+    
     public var personalNumber: String? { details[0x5F10] }
-    public var dateOfBirth: String? { details[0x5F2B] }
-    public var placeOfBirth: String? { details[0x5F11] }
-    public var address: String? { details[0x5F42] }
+    
+    public var dateOfBirth: String? {
+        if let date = details[0x5F2B] {
+            let strategy = Date.ParseStrategy(
+                format: "\(year: .padded(4))\(month: .twoDigits)\(day: .twoDigits)",
+                timeZone: TimeZone(identifier: "UTC")!
+            )
+            return try? Date(date, strategy: strategy).description
+        } else { return nil }
+    }
+    
+    public var placeOfBirth: String? {
+        if let components = details[0x5F11]?.components(separatedBy: "<") {
+            let city = components[0]
+            let province = "\(components[1])"
+            return "\(city) (\(province))"
+        } else { return details[0x5F11] }
+        
+    }
+    
+    public var address: String? {
+        if let components = details[0x5F42]?.components(separatedBy: "<") {
+            let address = components[0]
+            let city = components[1]
+            let province = components[2]
+            return "\(address) \(city) (\(province))"
+        } else { return details[0x5F42] }
+    }
+    
     public var telephone: String? { details[0x5F12] }
     public var profession: String? { details[0x5F13] }
     public var title: String? { details[0x5F14] }

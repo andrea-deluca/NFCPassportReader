@@ -49,13 +49,13 @@ public struct NFCPassportModel {
     }
     
     public var firstName: String {
-        personalDetails?.fullName?.components(separatedBy: "<<")[0] ??
-        travelDocument?.mrz.holderName?.components(separatedBy: "<<")[0] ?? "Unkown"
+        personalDetails?.fullName?.components(separatedBy: "<<")[1] ??
+        travelDocument?.mrz.holderName?.components(separatedBy: "<<")[1] ?? "Unkown"
     }
     
     public var lastName: String {
-        personalDetails?.fullName?.components(separatedBy: "<<")[1] ??
-        travelDocument?.mrz.holderName?.components(separatedBy: "<<")[1] ?? "Unkown"
+        personalDetails?.fullName?.components(separatedBy: "<<")[0] ??
+        travelDocument?.mrz.holderName?.components(separatedBy: "<<")[0] ?? "Unkown"
     }
     
     public var holderPicture: UIImage? {

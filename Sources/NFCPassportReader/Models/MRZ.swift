@@ -28,17 +28,17 @@ public struct MRZ {
     private var bytes: [UInt8]
     private var type: TDType
     
-    var code: String? { String(bytes: bytes, encoding: .utf8) }
+    public var code: String? { String(bytes: bytes, encoding: .utf8) }
     
-    var documentCode: String? {
+    public var documentCode: String? {
         String(bytes: bytes[0..<2], encoding:.utf8)
     }
     
-    var issuingState: String? {
+    public var issuingState: String? {
         String(bytes: bytes[2..<5], encoding:.utf8)
     }
     
-    var holderName: String? {
+    public var holderName: String? {
         switch self.type {
         case .TD1: String(bytes: bytes[60...], encoding:.utf8)
         case .TD2: String(bytes: bytes[5..<36], encoding:.utf8)
@@ -46,7 +46,7 @@ public struct MRZ {
         }
     }
     
-    var documentNumber: String? {
+    public var documentNumber: String? {
         switch self.type {
         case .TD1: String(bytes: bytes[5..<14], encoding:.utf8)
         case .TD2: String(bytes: bytes[36..<45], encoding:.utf8)
@@ -54,7 +54,7 @@ public struct MRZ {
         }
     }
     
-    var documentNumberCheckDigit: String? {
+    public var documentNumberCheckDigit: String? {
         switch type {
         case .TD1: String(bytes: bytes[14..<15], encoding:.utf8)
         case .TD2: String(bytes: bytes[45..<46], encoding:.utf8)
@@ -62,7 +62,7 @@ public struct MRZ {
         }
     }
     
-    var nationality: String? {
+    public var nationality: String? {
         switch self.type {
         case .TD1: String(bytes: bytes[45..<48], encoding:.utf8)
         case .TD2: String(bytes: bytes[46..<49], encoding:.utf8)
@@ -70,7 +70,7 @@ public struct MRZ {
         }
     }
     
-    var dateOfBirth: String? {
+    public var dateOfBirth: String? {
         switch self.type {
         case .TD1: String(bytes: bytes[30..<36], encoding:.utf8)
         case .TD2: String(bytes: bytes[49..<55], encoding:.utf8)
@@ -78,7 +78,7 @@ public struct MRZ {
         }
     }
     
-    var dateOfBirthCheckDigit: String? {
+    public var dateOfBirthCheckDigit: String? {
         switch self.type {
         case .TD1: String(bytes: [bytes[36]], encoding:.utf8)
         case .TD2: String(bytes: [bytes[55]], encoding:.utf8)
@@ -86,7 +86,7 @@ public struct MRZ {
         }
     }
     
-    var sex: String? {
+    public var sex: String? {
         switch self.type {
         case .TD1: String(bytes: [bytes[37]], encoding:.utf8)
         case .TD2: String(bytes: [bytes[56]], encoding:.utf8)
@@ -94,7 +94,7 @@ public struct MRZ {
         }
     }
     
-    var dateOfExpiry: String? {
+    public var dateOfExpiry: String? {
         switch self.type {
         case .TD1: String(bytes: bytes[38..<44], encoding:.utf8)
         case .TD2: String(bytes: bytes[57..<63], encoding:.utf8)
@@ -102,7 +102,7 @@ public struct MRZ {
         }
     }
     
-    var dateOfExpiryCheckDigit: String? {
+    public var dateOfExpiryCheckDigit: String? {
         switch self.type {
         case .TD1: String(bytes: [bytes[44]], encoding:.utf8)
         case .TD2: String(bytes: [bytes[63]], encoding:.utf8)
@@ -110,7 +110,7 @@ public struct MRZ {
         }
     }
     
-    var optionalData: String? {
+    public var optionalData: String? {
         switch self.type {
         case .TD1:
             (String(bytes: bytes[15..<30], encoding:.utf8) ?? "") +
@@ -120,13 +120,13 @@ public struct MRZ {
         }
     }
     
-    var checkDigit: String? {
+    public var checkDigit: String? {
         if self.type == .TD3 {
             String(bytes: [bytes[86]], encoding:.utf8)
         } else { nil }
     }
     
-    var compositeCheckDigit: String? {
+    public var compositeCheckDigit: String? {
         switch self.type {
         case .TD1: nil
         case .TD2: String(bytes: bytes[71..<72], encoding:.utf8)
