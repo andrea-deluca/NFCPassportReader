@@ -58,7 +58,7 @@ internal final class SubjectPublicKeyInfo {
                     throw NFCPassportReaderError.UnexpectedResponseStructure
                 }
                 
-                bytes = [UInt8](keyBytes.dropFirst())
+                bytes = [UInt8](keyBytes)
             }
         }
         

@@ -55,7 +55,7 @@ internal final class PassiveAuthenticationHandler {
                 throw NFCPassportReaderError.PassiveAuthenticationFailed("Data group hash not found in SOD")
             }
             
-            let computedHash = try HashAlgorithm.hash([UInt8](dataGroup.data.encodedBytes), with: sod.signedData.digestAlgorithm)
+            let computedHash = try HashAlgorithm.hash([UInt8](dataGroup.data.encodedBytes), with: sod.signedData.digestAlgorithm ?? .SHA1 )
             
             if computedHash != currentSodHash {
                 throw NFCPassportReaderError.PassiveAuthenticationFailed("\(String(describing: dataGroup.identifier)) hash not match")

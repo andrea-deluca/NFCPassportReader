@@ -77,7 +77,7 @@ internal final class SignedData {
     private var data: ASN1NodeCollection
     
     /// The hash algorithm used for signing.
-    private(set) var digestAlgorithm: HashAlgorithm!
+    private(set) var digestAlgorithm: HashAlgorithm?
     
     /// A dictionary representing encapsulated content information,
     /// where the key is the ``DGTag`` and the value is the data group hash.
