@@ -17,7 +17,17 @@ public struct DocumentDetails {
     private var details: [ASN1Tag: String] = [:]
     
     public var iussingAuthority: String? { details[0x5F19] }
-    public var dateOfIssue: String? { details[0x5F26] }
+    
+    public var dateOfIssue: String? {
+        if let date = details[0x5F26] {
+            let strategy = Date.ParseStrategy(
+                format: "\(year: .padded(4))\(month: .twoDigits)\(day: .twoDigits)",
+                timeZone: TimeZone(identifier: "UTC")!
+            )
+            return try? Date(date, strategy: strategy).formatted(date: .abbreviated, time: .omitted)
+        } else { return details[0x5F26] }
+    }
+    
     public var otherPersonDetails: String? { details[0xA0] }
     public var endorsementsOrObservations: String? { details[0x5F1B] }
     public var taxOrExitRequirements: String? { details[0x5F1C] }
