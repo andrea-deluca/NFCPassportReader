@@ -1,6 +1,26 @@
+# 0.1.1
+
+*Released: 2023/12/01*
+
+**What's changed:**
+
+This patch resolves some problems detected during demo development and testing. In particular,
+a bug has been found during Subject Public Key parsing: the first public key byte was removed and therefore 
+parsed key was invalid. Moreover, a bug that was causing a fatal error during PassiveAuthentication has been fixed.
+
+In addition, more info are now exported from the NFCPassportModel, such as security protocols, 
+data groups available and read, hashes and X509 certificate details stored within the SOD. 
+
+**Other:**
+
+- Exported dates are now formatted
+- Fixed exported name and surname that they were exchanged
+- Filler chars removed from exported strings
+- Fixed MRZ properties that are now public and exported
+
 # 0.1.0
 
-*Released: 2023/11/2*
+*Released: 2023/11/20*
 
 **What's changed:**
 
