@@ -12,31 +12,31 @@ import OpenSSL
 ///
 /// - SeeAlso: ``X509Certificate``
 
-internal struct X509CertificateDetails {
+public struct X509CertificateDetails {
     
     /// The fingerprint of the certificate.
-    private(set) var fingerprint: String?
+    public private(set) var fingerprint: String?
     
     /// The issuer of the certificate.
-    private(set) var iusser: CertificateEntity?
+    public private(set) var iusser: CertificateEntity?
     
     /// The subject (soggetto) of the certificate.
-    private(set) var subject: CertificateEntity?
+    public private(set) var subject: CertificateEntity?
     
     /// The serial number of the certificate.
-    private(set) var serialNumber: String?
+    public private(set) var serialNumber: String?
     
     /// The name of the signature algorithm used in the certificate.
-    private(set) var signatureAlgorithmName: String?
+    public private(set) var signatureAlgorithmName: String?
     
     /// The name of the public key algorithm used in the certificate.
-    private(set) var publicKeyAlgorithmName: String?
+    public private(set) var publicKeyAlgorithmName: String?
     
     /// The date of issue (validity start) of the certificate.
-    private(set) var dateOfIssue: String?
+    public private(set) var dateOfIssue: String?
     
     /// The date of expiry (validity end) of the certificate.
-    private(set) var dateOfExpiry: String?
+    public private(set) var dateOfExpiry: String?
     
     /// Initialize the ``X509CertificateDetails`` structure with an OpenSSL `X509` certificate.
     ///
@@ -135,23 +135,23 @@ private extension X509CertificateDetails {
 
 /// ``CertificateEntity`` is a structure representing the entity (issuer or subject) of an X.509 certificate.
 
-internal extension X509CertificateDetails {
+public extension X509CertificateDetails {
     struct CertificateEntity {
         
         /// The country associated with the entity.
-        private(set) var country: String?
+        public private(set) var country: String?
         
         /// The organization associated with the entity.
-        private(set) var organization: String?
+        public private(set) var organization: String?
         
         /// The organizational unit associated with the entity.
-        private(set) var organizationUnit: String?
+        public private(set) var organizationUnit: String?
         
         /// The common name associated with the entity.
-        private(set) var commonName: String?
+        public private(set) var commonName: String?
         
         /// The serial number associated with the entity.
-        private(set) var serialNumber: String?
+        public private(set) var serialNumber: String?
         
         /// Initialize the ``CertificateEntity`` with a description string.
         ///

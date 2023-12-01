@@ -48,17 +48,73 @@ public struct NFCPassportModel {
         (self.dataGroupsRead[.DG12] as? DataGroup12)?.documentDetails
     }
     
-    public var firstName: String {
-        personalDetails?.fullName?.components(separatedBy: "<<")[1] ??
-        travelDocument?.mrz.holderName?.components(separatedBy: "<<")[1] ?? "Unkown"
+    public var certificateDetails: X509CertificateDetails? {
+        (self.dataGroupsRead[.SOD] as? SOD)?.certs.first?.details
     }
     
-    public var lastName: String {
-        personalDetails?.fullName?.components(separatedBy: "<<")[0] ??
-        travelDocument?.mrz.holderName?.components(separatedBy: "<<")[0] ?? "Unkown"
+    public var lastName: String? {
+        personalDetails?.surname ??
+        travelDocument?.mrz.surname
+    }
+    
+    public var firstName: String? {
+        personalDetails?.name ??
+        travelDocument?.mrz.name
     }
     
     public var holderPicture: UIImage? {
         self.faceBiometricDataEncoding?.image
+    }
+    
+    public var availableDataGroups: [String]? {
+        (self.dataGroupsRead[.COM] as? COM)?.availableDataGroups.map { $0.name }
+    }
+    
+    public var dataGroupsReadNames: [String] {
+        self.dataGroupsRead.map { $0.key.name }
+    }
+    
+    public var paceSecurityProtocol: String? {
+        if let paceInfo = (self.dataGroupsRead[.DG14] as? DataGroup14)?
+            .securityInfos
+            .first(where: { $0 is PACEInfo }) as? PACEInfo {
+            return "\(paceInfo.securityProtocol)"
+        } else { return nil }
+    }
+    
+    public var chipAuthenticationSecurityProtocol: String? {
+        if let caInfo = (self.dataGroupsRead[.DG14] as? DataGroup14)?
+            .securityInfos
+            .first(where: { $0 is ChipAuthenticationInfo }) as? ChipAuthenticationInfo {
+            return "\(caInfo.securityProtocol)"
+        } else if let caPubKeyInfo = (self.dataGroupsRead[.DG14] as? DataGroup14)?
+            .securityInfos
+            .first(where: { $0 is ChipAuthenticationPublicKeyInfo }) as? ChipAuthenticationPublicKeyInfo {
+            return "\(caPubKeyInfo.securityProtocol.defaultChipAuthenticationSecurityProtocol)"
+        } else { return nil }
+    }
+    
+    public var chipAuthenticationPublicKeySecurityProtocol: String? {
+        if let caPubKeyInfo = (self.dataGroupsRead[.DG14] as? DataGroup14)?
+            .securityInfos
+            .first(where: { $0 is ChipAuthenticationPublicKeyInfo }) as? ChipAuthenticationPublicKeyInfo {
+            return "\(caPubKeyInfo.securityProtocol)"
+        } else { return nil }
+    }
+    
+    public var sodHashes: [String: String] {
+        if let sod = (self.dataGroupsRead[.SOD] as? SOD) {
+            var hashes: [String: String] = [:]
+            sod.signedData.encapContentInfo.forEach {
+                hashes.updateValue(
+                    BytesRepresentationConverter.convertToHexRepresentation(from: $1),
+                    forKey: $0.name
+                )}
+            return hashes
+        } else { return [:] }
+    }
+    
+    public var sodPemCertificate: String? {
+        (self.dataGroupsRead[.SOD] as? SOD)?.certs.first?.pem
     }
 }

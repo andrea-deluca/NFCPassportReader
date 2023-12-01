@@ -24,6 +24,20 @@ public struct PersonalDetails {
         } else { return details[0x5F0E] }
     }
     
+    internal var surname: String? {
+        if let components = details[0x5F0E]?.components(separatedBy: "<<") {
+            let surname = components[0].components(separatedBy: "<").joined(separator: " ")
+            return surname
+        } else { return details[0x5F0E] }
+    }
+    
+    internal var name: String? {
+        if let components = details[0x5F0E]?.components(separatedBy: "<<") {
+            let name = components[1].components(separatedBy: "<").joined(separator: " ")
+            return name
+        } else { return details[0x5F0E] }
+    }
+    
     public var personalNumber: String? { details[0x5F10] }
     
     public var dateOfBirth: String? {
@@ -32,8 +46,8 @@ public struct PersonalDetails {
                 format: "\(year: .padded(4))\(month: .twoDigits)\(day: .twoDigits)",
                 timeZone: TimeZone(identifier: "UTC")!
             )
-            return try? Date(date, strategy: strategy).description
-        } else { return nil }
+            return try? Date(date, strategy: strategy).formatted(date: .abbreviated, time: .omitted)
+        } else { return details[0x5F2B] }
     }
     
     public var placeOfBirth: String? {
